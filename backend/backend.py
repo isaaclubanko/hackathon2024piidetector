@@ -6,7 +6,7 @@ import json
 global MODEL
 MODEL = None
 
-@app.route('/') # ‘https://www.google.com/‘
+@app.route('/api/') # ‘https://www.google.com/‘
 def home():
     # allows the app to preload the model 
 	gen = pipeline("token-classification", "lakshyakh93/deberta_finetuned_pii", device=-1)
@@ -14,7 +14,7 @@ def home():
 	return "Model Loaded"
 
 
-@app.route('/detect_pii/', methods=['POST'])
+@app.route('/api/detect_pii/', methods=['POST'])
 def detect_pii():
     text_string = request.get_json().get('text_input', None)
 
