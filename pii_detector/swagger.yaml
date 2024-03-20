@@ -8,7 +8,7 @@ tags:
   - name: detect_pii
     description: PII detection from string
 paths:
-  '/detect_pii/':
+  '/api/detect_pii/':
     post:
       tags:
         - detect_pii
