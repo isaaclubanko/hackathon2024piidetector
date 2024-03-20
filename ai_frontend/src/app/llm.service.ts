@@ -16,9 +16,12 @@ export class LlmService {
     private http: HttpClient
   ) { }
 
-  public refreshAPI(){}
+  public refreshAPI(){
+    return this.http.get<string>('/api/')
+  }
 
   public postText(inputText:string){
     return this.http.post<PIIResponse[]>('/api/detect_pii/', {text_input: inputText})
   }
+
 }
