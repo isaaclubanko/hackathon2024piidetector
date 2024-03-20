@@ -1,7 +1,0 @@
-# python version: 3.10
-# TODO: make setup file
-pip install tensorflow
-pip install transformers
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
-pip install tf-keras
-pip install flask
