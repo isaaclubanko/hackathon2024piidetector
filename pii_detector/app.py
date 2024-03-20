@@ -19,7 +19,7 @@ def home():
 
 @app.route('/swagger.json')
 def get_swagger():
-    with open('piidetector/swagger.yaml', 'r') as f:
+    with open('pii_detector/swagger.yaml', 'r') as f:
         yaml_object = yaml.load(f, Loader=yaml.FullLoader)
         return json.dumps(yaml_object)
 
