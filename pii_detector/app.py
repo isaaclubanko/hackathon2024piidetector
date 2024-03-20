@@ -2,11 +2,11 @@ from flask import Flask, request, abort
 from transformers import pipeline
 import json
 import yaml
-import os
 app = Flask(__name__)
 
 global MODEL
 MODEL = None
+
 
 @app.route('/api/')
 def home():
@@ -19,8 +19,6 @@ def home():
 
 @app.route('/swagger.json')
 def get_swagger():
-    print(os.getcwd())
-    print(os.listdir())
     with open('piidetector/swagger.yaml', 'r') as f:
         yaml_object = yaml.load(f, Loader=yaml.FullLoader)
         return json.dumps(yaml_object)
@@ -36,7 +34,7 @@ def detect_pii():
     global MODEL
     if not MODEL:
         MODEL = pipeline("token-classification", "lakshyakh93/deberta_finetuned_pii", device=-1)
-    
+
     analysis = MODEL(text_string, aggregation_strategy="first")
 
     return_fields = []
@@ -48,4 +46,4 @@ def detect_pii():
     return json.dumps(return_fields)
 
 
-app.run(port=8002)
+app.run(port=8080)

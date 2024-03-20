@@ -12,7 +12,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'pii-detector = backend.app'
+            'pii-detector = pii_detector.app'
         ]
     }
 )
