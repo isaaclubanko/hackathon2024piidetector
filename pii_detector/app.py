@@ -46,4 +46,4 @@ def detect_pii():
     return json.dumps(return_fields)
 
 
-app.run(port=8080)
+app.run(host='0.0.0.0', port=8080)
