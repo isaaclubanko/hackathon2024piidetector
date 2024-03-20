@@ -61,4 +61,6 @@ python-xlsx/
 ssh/
 coverage.xml
 dev/**
-
+ai_frontend/.vscode/
+ai_frontend/.angular/
+ai_frontend/.editorconfig
