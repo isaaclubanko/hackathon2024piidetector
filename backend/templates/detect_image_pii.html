@@ -1,0 +1,10 @@
+<body>
+    <img width="100%" src={{file_path}}>
+</body>
+
+<h2>Please verify that the following data is not PII before uploading</h2>
+<ul>
+    {% for pii in detected_pii %}
+        <p>{{ pii.word }}: {{ pii.entity_group}} </p>
+    {% endfor %}
+</ul>
