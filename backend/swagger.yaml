@@ -1,0 +1,55 @@
+swagger: '2.0'
+
+info:
+  title: Swagger UI for PII Detection
+  version: 0.1.0
+
+tags:
+  - name: detect_pii
+    description: PII detection from string
+paths:
+  '/detect_pii/':
+    post:
+      tags:
+        - detect_pii
+      summary: Detect PII from string
+      operationId: detectPii
+      description: Detect PII
+      parameters:
+        - in: body
+          name: body
+          description: PII detection request
+          required: true
+          schema:
+            $ref: '#/definitions/DetectPiiRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DetectPiiResponse'
+        '500':
+          description: Internal Server Error
+
+definitions:
+  DetectPiiRequest:
+    type: object
+    required:
+      - text_input
+    properties:
+      text_input:
+        type: string
+        example: "My name is John Doe and my email is jdoe@email.com"
+  DetectPiiResponse:
+    type: object
+    properties:
+      pii_location:
+        type: array
+        items:
+          type: object
+          properties:
+            entity_group:
+              type: string
+              example: 11
+            end:
+              type: integer
+              example: 19

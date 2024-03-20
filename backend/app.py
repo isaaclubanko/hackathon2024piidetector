@@ -1,7 +1,9 @@
 from flask import Flask, request, abort
 from transformers import pipeline
-app = Flask(__name__)
 import json
+import yaml
+import os
+app = Flask(__name__)
 
 global MODEL
 MODEL = None
@@ -13,6 +15,15 @@ def home():
     global MODEL
     MODEL = gen
     return json.dumps({"model_loaded": True})
+
+
+@app.route('/swagger.json')
+def get_swagger():
+    print(os.getcwd())
+    print(os.listdir())
+    with open('piidetector/swagger.yaml', 'r') as f:
+        yaml_object = yaml.load(f, Loader=yaml.FullLoader)
+        return json.dumps(yaml_object)
 
 
 @app.route('/api/detect_pii/', methods=['POST'])
@@ -37,4 +48,4 @@ def detect_pii():
     return json.dumps(return_fields)
 
 
-app.run(port=3000)
+app.run(port=8002)
