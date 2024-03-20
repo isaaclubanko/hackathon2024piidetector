@@ -1,13 +1,26 @@
 <p>text-form works!</p>
-
-<div *ngIf="showTextBox; else loading">
-    <h2>Type text here</h2>
-    <input type="text" [formControl]="inputText">
-    <input (click)="postText()" type="submit" value="Submit">
-</div>
-<ng-template #loading>
-    <div>
-        <h2>Model Loading</h2>
+<div class="container">
+    <div *ngIf="showTextBox; else loading">
+        <h2>Type text here</h2>
+      <div class="form-group">
+        <textarea class="form-control" id="exampleFormControlTextarea1" [formControl]="inputText" rows="3"></textarea>
+      </div>
+      <button (click)="postText()" type="button" class="btn btn-primary">Submit</button>
     </div>
-</ng-template>
+    <ng-template #loading>
+        <div>
+            <div class="progress">
+                <div 
+                    class="progress-bar progress-bar-striped progress-bar-animated"
+                    role="progressbar"
+                    aria-valuenow="75"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    style="width: 75%"
+                >Menu Loading</div>
+            </div>
+        </div>
+    </ng-template>
+    
+</div>
 
