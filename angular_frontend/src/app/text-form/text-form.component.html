@@ -2,7 +2,7 @@
     <h2>Fill out Payment Form</h2>
     <div>
         <div *ngFor="let pii of piiDetections$ | async" class="alert alert-danger" role="alert">
-            Please remove the word <b>{{ pii.word }}</b>  from your comment as it is PII of type {{pii.entity_group}}
+            Please remove the word <b>{{ pii.word }}</b>  from your comment as it is PII of type {{pii.entityGroup}}
         </div>
     </div>
     <div *ngIf="showTextBox; else loading">

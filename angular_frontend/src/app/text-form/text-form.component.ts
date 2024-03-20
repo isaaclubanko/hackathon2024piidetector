@@ -3,11 +3,12 @@ import { LlmService } from '../llm.service';
 import { OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable, catchError, tap } from 'rxjs';
+import { PIIResponseModel } from '../models/pii-response.model'
 
-interface PIIResponse {
-  word: string,
-  entity_group: string
-}
+// interface PIIResponse {
+//   word: string,
+//   entity_group: string
+// }
 
 @Component({
   selector: 'app-text-form',
@@ -18,7 +19,7 @@ export class TextFormComponent implements OnInit{
 
   public inputText = new FormControl('', [Validators.required]);
   public showTextBox = false;
-  public piiDetections$: Observable<PIIResponse[]> = new Observable()
+  public piiDetections$: Observable<PIIResponseModel[]> = new Observable()
   public modelLoaded = new BehaviorSubject<boolean>(false);
 
   constructor(private llmService: LlmService){
