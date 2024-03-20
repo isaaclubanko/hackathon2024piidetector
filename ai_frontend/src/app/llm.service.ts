@@ -21,7 +21,7 @@ export class LlmService {
   }
 
   public postText(inputText:string){
-    return this.http.post<PIIResponse[]>('/api/detect_pii/', {text_input: inputText})
+    return this.http.post<any>('/api/detect_pii/', {text_input: inputText})
   }
 
 }

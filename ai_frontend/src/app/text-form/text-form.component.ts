@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { LlmService } from '../llm.service';
 import { OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { BehaviorSubject, of, catchError, tap } from 'rxjs';
+import { FormControl, Validators } from '@angular/forms';
+import { BehaviorSubject, Observable, catchError, tap } from 'rxjs';
 
 interface PIIResponse {
   word: string,
-  entityGroup: string
+  entity_group: string
 }
 
 @Component({
@@ -16,9 +16,9 @@ interface PIIResponse {
 })
 export class TextFormComponent implements OnInit{
 
-  public inputText = new FormControl('', {nonNullable: true});
+  public inputText = new FormControl('', [Validators.required]);
   public showTextBox = false;
-  public piiDetections: any[] = []
+  public piiDetections$: Observable<PIIResponse[]> = new Observable()
   public modelLoaded = new BehaviorSubject<boolean>(false);
 
   constructor(private llmService: LlmService){
@@ -46,8 +46,8 @@ export class TextFormComponent implements OnInit{
   }
 
   postText(){
-    this.llmService.postText(this.inputText.value).subscribe((response: PIIResponse[]) => {
-      this.piiDetections = response;
-    })
+    if (this.inputText.value !== null) {
+      this.piiDetections$ = this.llmService.postText(this.inputText.value)
+    }
   }
 }

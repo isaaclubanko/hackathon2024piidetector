@@ -1,8 +1,11 @@
 <div class="container">
     <h2>Fill out Payment Form</h2>
+    <div>
+        <div *ngFor="let pii of piiDetections$ | async" class="alert alert-danger" role="alert">
+            Please remove the word <b>{{ pii.word }}</b>  from your comment at is PII of type {{pii.entity_group}}
+        </div>
+    </div>
     <div *ngIf="showTextBox; else loading">
-
-
       <form style="margin-top:20px;" class="col-sm-6">
         <div class="form-group">
             <label for="exampleFormControlSelect1">Reimbursement Reason</label>
@@ -32,7 +35,7 @@
             <label for="exampleInputEmail1">Comments</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" [formControl]="inputText" rows="3"></textarea>
         </div>
-        <button (click)="postText()" type="submit" class="btn btn-primary" style="margin-top:20px;">Submit</button>
+        <button [disabled]="!inputText.valid" (click)="postText()" type="submit" class="btn btn-primary" style="margin-top:20px;">Submit</button>
     </form>
     </div>
     <ng-template #loading>
